@@ -16,11 +16,23 @@ Use for app creation, branding, icons, and splash work. [AGENTS.md](../AGENTS.md
 - A new app or game shows the MEONJI **wordmark**, used as the publisher's identifying mark, at cold launch before its normal entry screen.
 - Align the mark to the horizontal and vertical center of the full visible viewport. Retain the asset's transparent margins and aspect ratio; do not copy old x=0.54 or fixed horizontal-shift values.
 - Use a quiet solid background with sufficient contrast, continuous with the native launch background where practical. The mark is visible for about 0.9–1.0 seconds; a short fade may fit within that interval.
-- Size for the actual viewport and the current official wordmark's readability guidance. Keep enough clear space and preserve proportions; do not inherit the older logo's fixed width limits or orientation offsets. Confirm visible centering and legibility on the designated device.
+- Use the approved default size below, keeping the asset's clear space and proportions. Confirm visible centering and legibility on the designated device.
 - Load the bundled mark without network waits. Initialization may proceed concurrently. Then enter the app's existing loading, menu, or intended deep-link flow; preserve any pending destination.
 - Show once per cold launch, not on every resume, route change, or rebuild. Avoid two consecutive publisher-brand stages between the OS launch screen and app intro.
 - Missing assets must not trap users on a blank splash. Continue safely and report/fix the packaging defect before delivery; do not fabricate a replacement wordmark.
 - For an actual implementation change, capture the previous screen, run cold launch, observe mark/centering/duration/transition and applicable failure paths, and report real before/after images. No live launch is implied by reading these references.
+
+### Default wordmark size (approved 2026-11-03)
+Use the full visible viewport width W, before safe-area padding, with the current orientation:
+
+| Orientation | Wordmark width | Reference viewport and width |
+|---|---|---|
+| Portrait, including square | W × 0.497777778 (about 49.78%) | 360 × 640 → 179.2 logical pixels |
+| Landscape | W × 0.30625 (30.625%) | 640 × 360 → 196 logical pixels |
+
+- Use CSS pixels on the web, points on iOS, dp on Android, or framework logical pixels. Scale height with the official 1162:356 aspect ratio; center the entire distribution canvas on both axes.
+- These values already include the approved 30% reduction. Do not apply another 0.7 multiplier. For this splash, the approved size takes precedence over the general 256-CSS-pixel wordmark recommendation; keep the artwork unchanged.
+- The mark remains visible for about one second. This sets defaults for future apps and games; changing existing apps is a separate task.
 
 ## Existing references (source inspected 2026-11-03)
 - Dunk Loop: ContentView.swift, PublisherSplashScreenView / PublisherBrandMark / scheduleSplashDismissal. It uses a bundled meonji_publisher_logo and switches from publisher to game stage after 0.90 seconds.
