@@ -35,7 +35,7 @@ Apply the central [cleanup conditions](../AGENTS.md#generated-file-cleanup) and 
 Report actual moved/deleted bytes separately from whole-disk free-space changes. This example grants no new deletion, installation, or remote-write approval.
 
 ## Optional tools
-- callgraph: useful for locating symbols, callers/callees, shared widgets, and paths from screen to backend. Use absolute project paths and supplement dynamic edges with source inspection.
+- Graphify/callgraph: useful for dependencies, symbols, callers/callees, shared widgets, and paths from screen to backend. Use supported queries with absolute project paths and supplement dynamic or missing edges with source inspection. See [architecture and map usage](../guides/product-ui.md#architecture-and-dependency-maps); small edits need no full-project reanalysis or new tool installation.
 - context7: useful for confirming unfamiliar version-specific contracts. Use official/local evidence, not guessed APIs.
 - preflight.py: optional support/ownership/dependency/capacity inspection when useful, not approval or review clearance.
 - laya_classify.py: optional classification/recording aid only when deliberately selected. Its old decision table is not a mandatory route for any main.
