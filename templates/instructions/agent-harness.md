@@ -1,132 +1,45 @@
-# Planning and assignment usage
+# Optional planning and assignment usage
 
-Use for needed plan, assignment, optional-review, cleanup, or call-path formats. [AGENTS.md](../AGENTS.md) owns duties, [main modes](../AGENTS.md#main-modes), [plans](../AGENTS.md#applying-these-instructions), and [assignment](../AGENTS.md#models-and-delegation). [Reviewer contract](../review/reviewer-contract.md) owns review details.
+[AGENTS.md](../AGENTS.md) owns all common duties and review triggers. This guide supplies examples only. No model family must read it, classify through Laya, run preflight, or call planning agents merely to begin work.
 
-## Plan examples
+## Short plans
+The main decides the approach. Explain a material decision briefly and proceed within approval. Use a structured plan only when it helps a complex task; this is not a fixed pre-tool format.
 
-The main writes the plan, including an Astra main. Localize labels to the user's language. Four bullets mean four actual lines, not visual wrapping.
+Example: “I will reproduce the lost Back state, fix its initialization, and check the original path plus adjacent search.”
 
-```text
-- Goal: block non-owner access while preserving owner access
-- Scope: authorization function, direct callers, and related tests
-- Order: reproduce → minimal fix → required independent code review
-- Verification: allowed, denied, and error paths; resolve review findings
-```
+A high-risk example may name goal, owned scope, ordered checks, and required review. Do not ask for approval of an already authorized plan.
 
-Proceed after the explanation when approval is unnecessary. Small-work example: “I will update the requested copy and check its translations and actual screen.”
+## Ownership and delegation
+Default to one main owner. Parallelize independent work only when it helps; serialize shared files, devices, and release state.
 
-For a navigation bug, use the same four-line form: goal = preserve filters after Back; scope = list/filter state and related tests; order = reproduce and trace state before fixing; verification = original path and adjacent search/sort flows.
-For high-risk screen changes, connect required UI review as well as code review under the central trigger.
-Plan-change example: “Shared-state initialization causes the reset. I will fix its condition and check the two screens sharing that state.”
+A needed brief can contain:
+- Goal and Done when.
+- Owned files, prohibited scope, and relevant sources.
+- Requested role/model/effort and actual support or unknowns.
+- Relevant checks, expected results, and failure boundary.
 
-## Cleanup example
+Simple repeated replacements normally use batch editing. If a delegated pattern needs an example, the main completes one first. Unknown causes and unclear ownership stay with the main until narrowed.
 
-For a cleanup request or the generated-file trigger in [section 6](../AGENTS.md#generated-file-cleanup), use [maintenance cleanup usage](../guides/maintenance.md#cleanup-usage). The central rules determine owner, automatic categories, approval, and limits; this example grants no additional deletion or model scope.
+User-selected Claude may serve as main, implementation, planning/instruction, or review owner when supported. Selecting the main does not select additional Claude/Grok subagents. Fixed roles and actual permission boundaries remain binding.
 
-```text
-- Goal: reclaim space from verified disposable files
-- Scope: approved cleanup targets; preserve current work, recovery history, and protected paths
-- Order: inventory and copy evidence → shared protection checks → recovery intent and source recheck → authorized Trash move
-- Verification: compare protected-path baselines and move records; report moved bytes separately from free-space change; inventory old Trash only
-```
+## Needed review
+Apply [review triggers](../AGENTS.md#7-review-triggers-and-holds) first. Use [dispatch](../review/dispatch.md) and review/1.4 only for actual required or concretely needed review. Preserve the main's permissions; review runs in its separate actual read-only session.
 
-## Assignment examples
+The existing run_readonly_review.py supports requested native roles and model/effort values; inspect its current help and logs rather than inventing support. No smoke test or demo is triggered by an instruction edit or installed skill.
 
-Apply the [central priority table](../AGENTS.md#models-and-delegation), without adding gates.
+Recheck changed findings with the original reviewer as described in dispatch. An unavailable optional reviewer adds no completion gate.
 
-- A one-file payment/authorization change: risk first; main directly or a needed eligible high+ implementer, then required review. Claude appears only when selected for that role. Astra retains direct implementation authority.
-- Unknown cause: establish reproduction/hypotheses first; small scope alone does not justify handing cause analysis to Sol Light.
-- Overlapping writes: main sets ownership/order and serializes.
-- Independent non-high-risk translation groups with clear Done when: delegate to Sol Light only if there is meaningful delegation value.
-- Small edits/plans: main directly; no automatic effort escalation or planning agent.
-- User-selected Claude: either Sonnet or Opus may fill any allowed role. A main-model choice does not select extra Claude subagents. Connect the central selection condition, rationale, and unknowns.
-- Fixed-role/model mismatch: use eligible `worker`/`default` with a narrow brief, not a fixed-role TOML override. Review keeps its dedicated read-only path; Baton stays Sol Light.
-- Ordinary copy/instruction edits: main checks the documents/relevant results and finishes. Model availability alone does not trigger review or demonstrations.
+## Cleanup
+Apply the central [cleanup conditions](../AGENTS.md#generated-file-cleanup) and [maintenance usage](../guides/maintenance.md#cleanup-usage). Inventory relevant roots and verify usage/reference/copy evidence and protected ancestors; labels and age alone do not prove disposal.
 
-## Brief format
+Report actual moved/deleted bytes separately from whole-disk free-space changes. This example grants no new deletion, installation, or remote-write approval.
 
-Add needed fields to the existing task message:
+## Optional tools
+- callgraph: useful for locating symbols, callers/callees, shared widgets, and paths from screen to backend. Use absolute project paths and supplement dynamic edges with source inspection.
+- context7: useful for confirming unfamiliar version-specific contracts. Use official/local evidence, not guessed APIs.
+- preflight.py: optional support/ownership/dependency/capacity inspection when useful, not approval or review clearance.
+- laya_classify.py: optional classification/recording aid only when deliberately selected. Its old decision table is not a mandatory route for any main.
+- API specifications: use the api-spec skill when requested or a real frontend/backend contract needs documentation; a copy/spacing change alone creates no spec.
+- Tool-enforced safety limits still apply. A graph score is evidence to investigate concrete effects, not permission or automatic review clearance.
 
-```text
-Goal / Done when:
-Owned files / prohibited scope / references:
-Actual agent_type / model / effort / selection rationale:
-Order / checks / expected results / failure boundary:
-Original evidence / remaining issues:
-```
-
-Give Sol Light numbered action/check steps. For parallel writes, high risk, or capacity concerns, connect dependencies, approval, support, and capacity evidence.
-
-| Role | Use/output |
-|---|---|
-| explorer / librarian | Local locations / official and upstream contracts |
-| metis / plan / momus | Undefined-decision analysis / executable plan / completion-evidence review |
-| sol_light_worker / luna_worker | Owned implementation, checks, issue report |
-| worker / default | Narrow implementation or instruction/plan artifact with an eligible model |
-| ui_reviewer / code_reviewer | Assigned review findings and evidence |
-| cleanup_worker | Approved cleanup summary |
-
-### User-selected Claude
-
-Use this example only when the user selects this subagent role and delegation is needed.
-
-```text
-spawn_agent: agent_type=worker, model=anthropic/claude-opus-5-5, reasoning_effort=high, fork_turns=none
-Goal / Done when: update one instruction file's examples; reread against central conditions
-Owned file: <one absolute path>
-Prohibited: other files, settings, remote writes, extra agent calls
-User selection / delegation value: <role-specific choice and concrete benefit>
-Failure boundary: report ambiguity/mismatch without guessing or editing
-```
-
-An instruction/plan owner writes only the assigned artifact, not product patches. One-file ownership is a brief constraint, not a technical sandbox. A full-access parent's child may have full access; compare actual permissions and changed files to records.
-
-For user-selected Claude code review that is needed under section 7, use [read-only dispatch](../review/dispatch.md#read-only-dispatch):
-
-```sh
-python3 ${CODEX_HOME_DIR}/harness/run_readonly_review.py --roles code_reviewer --reviewer-model anthropic/claude-opus-5-5 --reviewer-effort high --cwd <absolute-project> --brief-file <brief> --output <new-report.json>
-```
-
-### Unreadable routed task input
-
-Only for needed, user-selected Claude delegation: native encrypted V2 tasks have failed on this route. Do not repeat unchanged calls or decrypt input. Main prepares a fixed, approved narrow packet; a separate Claude dispatcher sends its path, SHA256, run ID, and role as a readable task. It assigns only the chosen worker and returns the original result, without changing main/global settings.
-
-```text
-Dispatcher: selected Claude/low, approved worker permissions
-Worker: worker, selected Claude/high, fork_turns=none
-Readable task: packet absolute path + SHA256 + run ID + role; read the whole packet first
-Review: run_readonly_review.py manages Claude/low/read-only plus the dedicated reviewer
-```
-
-Per-run TOML file references alone did not fix transport. Verify readable spawn arguments, linked delivery, full packet reads, and actual model/effort/permissions. A hash/request alone is not input-application proof. Preserve failed/successful attempts, packets, changes, and original returns in the work record; see [Dispatch](../review/dispatch.md).
-
-<a id="필요한-도구-사용법"></a>
-## Tool usage
-
-Use the installed CLI contracts at `${CODEX_HOME_DIR}/harness/README.md` and [review dispatch](../review/dispatch.md).
-
-For Laya optional classification, submit one or two sentences after implementation direction is known. Read `treat_as` and callgraph risk:
-
-| Classification/risk | Optional path |
-|---|---|
-| review/hard + MEDIUM | One optional code_reviewer; momus for a plan |
-| review/hard + LOW/none | Main checks; optional review only with concrete need |
-| ambiguous/unknown | Main checks; skip planning roles before repeated-failure cause reconsideration |
-| clear + LOW/none | Main checks |
-
-Connection failure, over 5 seconds, truncation, or empty input means unknown/ambiguous. This usage does not authorize server start/reset. Use the separately installed API-spec skill at `${CODEX_HOME_DIR}/skills/api-spec/SKILL.md` for format.
-
-## Code graph queries
-
-Use absolute `project_path`.
-
-| Question | Query |
-|---|---|
-| Symbol | find_symbol |
-| Direct callers/callees | callers / callees |
-| A→B / screen→backend | path / screen_to_backend |
-| Shared widget / existing-symbol impact | widget_usage / impact |
-
-Resolve ambiguous names using returned `Class.member` or `path::name`. Supplement callbacks, Streams, Providers, and string RPCs with source search. TS caller counts are per calling function. At least 20 callers, 3 direct backend callers, or authentication patterns are HIGH signals; apply central duties rather than inferring approval.
-
-On resume, connect source baseline, processes, unfinished work, next action, and original evidence to the existing message.
+For CLI data formats and observed usage records, consult [local contracts](../harness/README.md) only when using those helpers.

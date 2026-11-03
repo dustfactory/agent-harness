@@ -1,23 +1,23 @@
 # Codex instructions, review documents, and cleanup safety helpers
 
-Canonical English instructions and review documentation for a personal Codex setup. The [Korean summary](templates/instructions/summary.ko.md) is reference only; it does not change duties, approval boundaries, or exceptions.
+Compact shared instructions and review documentation for a personal Codex/Claude Code setup. [AGENTS.md](templates/AGENTS.md) is the common contract; the [summary pointer](templates/instructions/summary.ko.md) adds no separate duties.
 
 ## Authority and contents
 
-- [AGENTS.md](templates/AGENTS.md): common duties, main modes, approval, preservation, and review triggers.
+- [AGENTS.md](templates/AGENTS.md): common duties, approval, preservation, and review triggers.
 - [Agent harness](templates/instructions/agent-harness.md): scoped planning, assignment, and cleanup examples.
 - [Maintenance guide](templates/guides/maintenance.md): cleanup inventory, usage/copy evidence, ancestor protection, and result reporting.
 - [Cleanup skill](templates/skills/ai-cleanup/SKILL.md): shared Mole protection, rechecked Trash moves, durable recovery journals, and non-destructive regression checks.
 - [Reviewer contract](templates/review/reviewer-contract.md): `review/1.4` findings, evidence, and independence requirements.
 - [Review dispatch](templates/review/dispatch.md): actual read-only execution, delivery evidence, and rechecks.
 
-Astra mains retain direct planning, implementation, verification, and optional-review judgment. Claude/Grok require the user's selection for the relevant task/role. Ordinary instruction edits do not trigger agents or reviewer demonstrations. Approval, security, high-risk review, and preservation remain governed by `AGENTS.md`.
+The selected main directly plans, implements, verifies, and decides optional-review need. There is no automatic planning-role, Laya-classification, preflight, or cleanup-worker route by model family. Claude/Grok require the user's selection for the relevant task/role. Ordinary instruction edits do not trigger agents or reviewer demonstrations. Approval, security, high-risk review, and preservation remain governed by `AGENTS.md`.
 
 Cleanup instructions do not grant blanket deletion permission. Protected recovery history, including IDE `LocalHistory`, also blocks recursive deletion of its ancestors. The shared helper queries Mole's installed matcher and persistent whitelist; missing required protections hold candidates. Automatic cleanup never empties Trash. Tool classifications are candidate hints; usage/reference or retained-copy evidence and central approval still apply. Removed/moved bytes and net free-space change are separate measurements.
 
 ## Bundled scope and local configuration
 
-Canonical instruction documents use the existing `${VAR}` placeholders from [.env.example](.env.example). The cleanup skill includes the runtime modules and a [configuration example](templates/skills/ai-cleanup/cleanup.example.toml) with empty candidate scope and archive credentials. Actual configuration, whitelist contents, keys, manifests, journals, and personal verification records are excluded.
+Shared instruction templates use the existing `${VAR}` placeholders from [.env.example](.env.example). The cleanup skill includes the runtime modules and a [configuration example](templates/skills/ai-cleanup/cleanup.example.toml) with empty candidate scope and archive credentials. Actual configuration, whitelist contents, keys, manifests, journals, and personal verification records are excluded.
 
 Helpers under `harness/` and skills other than `ai-cleanup` remain external prerequisites. Examples such as `run_readonly_review.py`, `laya_classify.py`, `preflight.py`, and `ui_change_detect.py` require verified local installations. Missing helpers do not imply support or clearance; use the central missing-capability and required-review rules. The bundled cleanup helper still requires an installed Mole matcher and a reviewed local policy.
 
@@ -49,7 +49,7 @@ The renderer/installer, actual cleanup/move/restore stages, app shutdown, and ag
 
 **Runtime status: UNVERIFIED.** Authenticated Claude Code reviewer execution, actual model/effort delivery, and integrated enforcement have not passed a live review. This configuration is published with that limitation; publication is not a reviewer PASS or actual-cleanup approval. No further login, model calls, deletion, or UI reviewer calls were used for this update.
 
-A Claude Code port of the same rules, written in Korean: [CLAUDE.md](claude/CLAUDE.md) restates common duties and points to the Codex guides, reviewer contract, and skill scripts. Agent frontmatter records requested OpenCodex models/effort; actual routing and application require execution records. Skills are thin wrappers around the Codex installations.
+[CLAUDE.md](claude/CLAUDE.md) imports the common AGENTS.md. Its short adapter preserves the existing reviewer restrictions and unverified-runtime limitation; imports do not alter technical permissions. Agent frontmatter records requested OpenCodex models/effort; actual routing and application require execution records. Shared skills may be linked into Claude Code's personal skill directory; inspect skill-only contents and omit plugin activation metadata when only a skill was requested.
 
 `code-reviewer` has only `Read`, `Grep`, and `Glob`, with no Bash, MCP, edit, skill, or agent tools. For macOS execution evidence, [run_code_review.py](claude/scripts/run_code_review.py) prepares a separate macOS read-only Claude Code dispatcher and one native `code-reviewer`. The dispatcher requests Sol/low; reviewer model/effort default to its frontmatter (Astra/high), with explicit per-run overrides. Normal main permissions and settings stay unchanged by the runner. The worker's intended writable scope is its isolated run state and per-run Claude transcript namespace. Kernel queries inspect permissions without write probes. The collector is not a verified end-to-end review path yet. It uses the normal `ocx claude` authentication environment and never records credential values or selects accounts.
 
@@ -79,7 +79,7 @@ Run directories retain the fixed packet, hashes, native stream/transcripts, and 
 
 Hooks remain supplementary. `git-guard.sh` recognizes absolute Git paths, global options, compound commands and common shell wrappers. It does not fully sandbox arbitrary programs. `reviewer-readonly-guard.sh` accepts a narrow local-read command list and rejects interpreters, compound commands, redirects and all `gh` calls, including implicit POST/GraphQL requests. Neither hook executes the command it inspects. Malformed input is denied; interpreter/helper failures exit 2. `impact-reminder.sh` remains a non-blocking reminder. These changes do not claim that UI/browser tools or other agents have been runtime-validated.
 
-Install (review first; nothing here overwrites settings automatically):
+Legacy adapter installation (review first; not needed to apply the shared instruction entry):
 
 ```sh
 cd claude
@@ -90,3 +90,9 @@ chmod +x ~/.claude/hooks/harness/*.sh
 Then merge the two `PreToolUse` entries from `~/.claude/settings.hooks.json` into the existing `hooks.PreToolUse` array of `~/.claude/settings.json` (append; keep other hooks), validate with `python3 -m json.tool`, and start Claude Code with `ocx claude`. The collector currently has no completed authenticated reviewer run; isolated kernel permissions were observed, but reviewer model/effort and product verdict remain unverified. Normal Claude authentication must already work.
 
 Existing files with the same names are overwritten by the loop above; skip files you maintain yourself. For a selective update, copy only reviewed changed files, including `guard.py` beside both hook entrypoints. Do not replace settings or copy private run records into the repository. Other agents' routing, effort and live hooks remain unverified until separately evidenced.
+
+## Personal production profile
+
+- [Branding and app/game splash](templates/guides/branding.md): an unmodified official wordmark, centered in both axes, visible for about one second at cold launch; bundled assets avoid network waits. Dunk Loop and secret-hand-prototype are source references, not a request to change their app code.
+- [Advertisement production](templates/guides/advertisements.md): existing renderers remain reusable; Hyperframes is optional and local-video-only. Keep production inputs and reproduction commands, verify archived material, then apply the existing cleanup approval.
+- Hyperframes core skills are an external optional installation. The local setup used upstream revision `dffc640e8556b675e7e1d73f482c19ee7e855782`; no third-party renderer source, runtime, model, login, or service settings are bundled here.

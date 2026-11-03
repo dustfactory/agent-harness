@@ -5,7 +5,7 @@ description: Plan, trash, encrypt, verify, and restore AI-created backups, test/
 
 # Cleanup usage
 
-[AGENTS.md sections 2, 6, and 9](../../AGENTS.md) own applicability, owner, approval categories, confirmation, preservation, and reporting. Use these commands only within that scope.
+[AGENTS.md](../../AGENTS.md) owns applicability, owner, approval categories, confirmation, preservation, and reporting. Use these commands only within that scope.
 
 Script: `python3 ${CODEX_HOME_DIR}/skills/ai-cleanup/ai_cleanup.py`.
 Local configuration: adjacent `cleanup.toml`, adapted from [cleanup.example.toml](cleanup.example.toml). The example has no candidate globs, image extensions, project roots, archive destination, or recipient. It grants no cleanup permission.
@@ -24,7 +24,7 @@ python3 -B verify_non_destructive.py
 CLEANUP_TEST_LIVE_MOLE=1 python3 -B verify_non_destructive.py
 ```
 
-The first command uses memory-only transfer/journal I/O. The second also queries the installed Mole policy without running cleanup. The runner rejects real filesystem mutations, native move calls, and subprocesses other than the fixed protection query. It does not prove actual move/restore or power-loss recovery. Independent review of destructive paths remains required under section 7; these tests do not grant execution clearance.
+The first command uses memory-only transfer/journal I/O. The second also queries the installed Mole policy without running cleanup. The runner rejects real filesystem mutations, native move calls, and subprocesses other than the fixed protection query. It does not prove actual move/restore or power-loss recovery. Apply the central concrete-risk review conditions; these tests do not grant execution clearance.
 
 ## Automatic path
 

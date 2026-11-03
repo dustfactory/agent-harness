@@ -4,7 +4,7 @@ Use for mobile development, debugging, UI checks, tests, or release verification
 
 ## Device selection
 
-- iOS default: **iPhone 17 Pro Simulator**.
+- iOS default: **iPhone 18 Pro Simulator**.
 - Android default: `Medium_Phone_API_35` (1080×2400, 420dpi).
 - Extra checks for large screens, long translations, or spacious layouts: `Pixel_9_Pro_API_35`.
 - Latest API compatibility: `DunkLoop_API_36`.
