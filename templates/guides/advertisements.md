@@ -21,6 +21,7 @@ Use for requested app advertisements and motion assets. [AGENTS.md](../AGENTS.md
 ## Preserve enough to reproduce
 - Keep production code, scene/timeline data, source/generated assets, footage, fonts/licenses, audio and available separate stems, dependency lockfiles, runtime versions, and the successful render/capture commands in the production workspace.
 - Temporary frames and rebuildable intermediates may use a scratch directory. Do not keep the only renderer, source recording, or stem in /tmp.
+- .hyperframes/ contains editor history. Treat it as recovery data, keep the production workspace outside temporary/automatic-cleanup roots, and do not remove the directory to reclaim space.
 - Archive final requested formats and all available production material under the app's name in dustfactory/app-advertisements with size/hash manifests. Verify the actual remote contents before applying the central redundant-copy cleanup approval.
 - Preserve active work, app-used assets, Git/recovery history, uncertain or changed material. Record missing inputs honestly; a mix extracted from a finished video is not a set of original stems.
 - The existing archive documents some lost renderers/recordings/stems, old absolute paths, and incomplete rerender checks. Do not label every historical package reproducible.
