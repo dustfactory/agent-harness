@@ -21,15 +21,17 @@ Shared instruction templates use the existing `${VAR}` placeholders from [.env.e
 
 Helpers under `harness/` and skills other than `ai-cleanup` remain external prerequisites. Examples such as `run_readonly_review.py`, `laya_classify.py`, `preflight.py`, and `ui_change_detect.py` require verified local installations. Missing helpers do not imply support or clearance; use the central missing-capability and required-review rules. The bundled cleanup helper still requires an installed Mole matcher and a reviewed local policy.
 
-The bundled `templates/agents/*.toml` and `config.agents.toml` remain unchanged legacy examples with older inline role instructions. Do not install them as the current `review/1.4` runtime without reconciling the role contract and verifying actual permissions. A role-file `read-only` declaration alone is not execution evidence.
+The bundled `templates/agents/*.toml` are scoped role loaders; `config.agents.toml` registers the two review roles only. Preserve existing main permissions, model defaults, and registration when applying selected files. Custom role files do not override the parent's sandbox: use the [separate read-only dispatch](templates/review/dispatch.md#read-only-dispatch) for actual review and verify execution records. A role name or permission declaration alone is not execution evidence.
 
-[Sources](templates/review/SOURCES.md) records historical design references. The [loading-check procedure](templates/review/SMOKE_TEST.md) is optional documentation, not an automatic test or a new execution claim. No agents or role checks were run for this publication.
+[Sources](templates/review/SOURCES.md) records historical design references. The [loading-check procedure](templates/review/SMOKE_TEST.md) is optional documentation, not an automatic test. Publication alone does not establish runtime permissions; use execution evidence for the relevant role and snapshot.
+
+Local Codex verification on 2026-11-03 used one `code_reviewer` on `gpt-6.1-sol/high` through the separate read-only dispatcher, with CLI `0.166.0-alpha.5.1`. Execution records confirmed `review/1.4` contract/method loading and root/read filesystem permissions. Non-mutating macOS kernel queries allowed reads and denied writes to the main config, common instructions, and reviewer role file; main settings stayed unchanged. This covers that Codex execution only, not Claude execution, other roles, or remote/MCP write restrictions.
 
 ## Rendering and applying reviewed files
 
 1. Review the templates and adapt personal preferences, tools, branding, and device names to your environment.
 2. Create a local `.env` using the variable names in [.env.example](.env.example). Keep real values out of Git and never invent credentials or service identifiers for actual execution.
-3. Review [render.py](render.py) before running it: its normal rendering path removes the existing `build/` tree and writes rendered templates there. `--install` additionally overwrites files under `CODEX_HOME_DIR`, including the legacy role TOMLs.
+3. Review [render.py](render.py) before running it: its normal rendering path removes the existing `build/` tree and writes rendered templates there. `--install` additionally overwrites files under `CODEX_HOME_DIR`, including role TOMLs.
 4. Copy only reviewed files for the intended scope. Preserve existing role files, configuration, sessions, and worktrees. For cleanup, adapt `cleanup.example.toml` to an ignored local `cleanup.toml` and merge reviewed whitelist additions without replacing existing protections. Follow the skill's setup and central approval/review conditions before execution. Do not use the full installer for a selective update.
 
 Document destinations are `AGENTS.md`, `guides/`, `instructions/`, and `review/` under `CODEX_HOME_DIR`; the cleanup package belongs in `skills/ai-cleanup/`. Other referenced helpers/skills remain separate installations.

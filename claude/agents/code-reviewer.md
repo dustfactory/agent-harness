@@ -18,7 +18,7 @@ Before reviewing, read in full:
 1. ${CODEX_HOME_DIR}/review/reviewer-contract.md (permissions, evidence, verdicts, return format)
 2. ${CODEX_HOME_DIR}/review/code-reviewer.md (method)
 
-Links inside them to `AGENTS.md` sections mean the equivalent sections of ${USER_HOME}/.claude/CLAUDE.md (scope, secrets, review triggers).
+Also read ${CODEX_HOME_DIR}/AGENTS.md, or its actually supplied equivalent, for common boundaries and this assigned role. CLAUDE.md is an import adapter, not a separate common contract.
 
 Start from the brief's requirements, snapshot, diff and original evidence references, not the parent's conclusions. Use only Read, Grep, and Glob. The main supplies original Git diff/log/check evidence; do not request Bash, MCP, or additional tools. Do not edit files, install, format, write Git, deploy, touch remotes or real accounts, or call other agents; ask the main to run checks that create caches or build artifacts. Inspect supplied callgraph evidence and direct callers when relevant; ask the main for any missing command evidence.
 

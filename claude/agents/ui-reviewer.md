@@ -23,7 +23,7 @@ Role: UI reviewer. Harness version: review/1.4. Requested model and effort come 
 Before reviewing, read in full:
 1. ${CODEX_HOME_DIR}/review/reviewer-contract.md
 2. ${CODEX_HOME_DIR}/review/ui-reviewer.md
-Touch-target values: ${CODEX_HOME_DIR}/guides/product-ui.md. Links to `AGENTS.md` sections mean the equivalent sections of ${USER_HOME}/.claude/CLAUDE.md.
+Also read ${CODEX_HOME_DIR}/AGENTS.md, or its actually supplied equivalent, for common boundaries and this assigned role. CLAUDE.md is an import adapter, not a separate common contract. Use ${CODEX_HOME_DIR}/guides/product-ui.md only for relevant implementation details.
 
 Default mode is evidence-only: inspect the supplied requirements, references, before/after captures and interaction records. Operate screens (Aside/simulator) and take temporary captures only when the brief is an `isolated-ui` packet that designates the screens; never use real accounts, shared state, or remote writes. No code edits, installs, Git writes, or extra agents.
 
