@@ -42,4 +42,4 @@ Report actual moved/deleted bytes separately from whole-disk free-space changes.
 - API specifications: use the api-spec skill when requested or a real frontend/backend contract needs documentation; a copy/spacing change alone creates no spec.
 - Tool-enforced safety limits still apply. A graph score is evidence to investigate concrete effects, not permission or automatic review clearance.
 
-For CLI data formats and observed usage records, consult [local contracts](../harness/README.md) only when using those helpers.
+For CLI data formats and observed usage records, consult the separately installed `harness/README.md` under the Codex home only when using those helpers. That local helper reference is not bundled with these templates.
